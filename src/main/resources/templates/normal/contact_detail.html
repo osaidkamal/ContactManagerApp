@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xlmns:th="https://www.thymeleaf.org">
+  <head th:replace="normal/base::userheader" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Detail</title>
+  </head>
+  <body>
+    <nav th:replace="normal/base::navbarUser"></nav>
+    <div>
+      <div th:replace="normal/base::sidebar"></div>
+    </div>
+    <div>
+      <div class="content add">
+       <div th:if="${contact}">
+        <div class="card me-5 mt-4" >
+            <div class="container text-center">
+                <img class="cpic me-2 mt-2" th:src="@{'/images/'+${contact.image}}">
+                <h3 class="mt-3"><span th:text="${contact.name}"></span></h3>
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tbody>
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col"><span th:text="${'CNT2022'+contact.cid}"></span></th>   
+                          </tr>
+                          <tr>
+                            <th scope="col">Full Name</th>
+                            <th scope="col"><span th:text="${contact.name}"></span>&nbsp;<span th:text="${ contact.secondName}"></span></th>   
+                          </tr>
+                        
+                       
+                          <tr>
+                            <th scope="row">Email</th>
+                            <th scope="col"><span th:text="${contact.email}"></span></th>
+                          </tr>
+
+                          <tr>
+                            <th scope="row">Mobile No</th>
+                            <th scope="col"><span th:text="${contact.phone}"></span></th>
+                          </tr>
+                        
+                          <tr>
+                            <th scope="row">Work</th>
+                            <th scope="col"><span th:text="${contact.work}"></span></th>
+                          </tr>
+                         
+                        
+                        </thead>
+                        </tbody>
+                      </table>
+                      <div>
+                        <th scope="col"><span th:text="${contact.description}"></span></th>
+                      </div>
+                      
+                </div>
+            </div>
+           
+        </div>
+        <div class="container text-center mt-3 d-flex">
+            <form th:action="@{'/user/delete/'+${contact.cid}}" method="post">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
+              <form th:action="@{'/user/update/'+${contact.cid}}" method="post">
+                <button type="submit" class="ms-2 btn btn-primary btn-sm">Update</button>
+              </form>
+          </div>
+       </div>
+      
+          <h2 class="mt-5 text-center" th:unless="${contact}">No Permission</h2>
+    </div>
+  </body>
+</html>

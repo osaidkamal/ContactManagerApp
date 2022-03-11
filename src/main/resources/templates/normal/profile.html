@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xlmns:th="https://www.thymeleaf.org">
+  <head th:replace="normal/base::userheader" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+  </head>
+  <body>
+    <nav th:replace="normal/base::navbarUser"></nav>
+    <div>
+      <div th:replace="normal/base::sidebar"></div>
+    </div>
+    <div>
+      <div th:fragment="content" class="content">
+        
+        <div class="add mt-2">
+          <h1 class="mt-5">Profile Dashboard</h1>
+          <table class="table">
+            <thead>
+                <tbody>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col"><span th:text="${user.id}"></span></th>   
+              </tr>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col"><span th:text="${user.name}"></th>   
+              </tr>
+            
+           
+              <tr>
+                <th scope="row">Email</th>
+                <th scope="col"><span th:text="${user.email}"></span></th>
+              </tr>
+              <tr>
+                <th scope="row">About</th>
+                <th scope="col"><span th:text="${user.about}"></span></th>
+              </tr>
+
+             
+            
+             
+            
+            </thead>
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </body>
+</html>

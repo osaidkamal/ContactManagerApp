@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xlmns:th="https://www.thymeleaf.org">
+  <head th:replace="normal/base::userheader" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Contacts</title>
+  </head>
+  <body>
+    <nav th:replace="normal/base::navbarUser"></nav>
+    <div>
+      <div th:replace="normal/base::sidebar"></div>
+    </div>
+    <div>
+      <div class="content">
+        <div class="add">
+     <br/>
+          
+          <div class="card me-5">
+            <div class="body">
+              <div class="search">
+                <input onkeyup="search()" type="text" class="form-control" name="work" placeholder="Search Contacts" id="search_input" aria-describedby="emailHelp">
+              </div>
+              <div class="search_result">
+                <!-- <h1>hehhffddfdfdf</h1> -->
+              </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="c:${contacts}">
+                    <th scope="row" th:text="${'CNT2022'+c.cid}"></th>
+                    <td><img class="my_profile_pic me-2" th:src="@{'/images/'+${c.image}}"> <span th:text="${c.name}"></span></td>
+                    <td><a th:href="@{'/user/contact/'+${c.cid}}" <span th:text="${c.email}"></span></td> 
+                    <td th:text="${c.phone}"></td>
+                    <td class="d-flex">
+                    <form th:action="@{'/user/delete/'+${c.cid}}" method="post">
+                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                    <form th:action="@{'/user/update/'+${c.cid}}" method="post">
+                      <button type="submit" class="ms-2 btn btn-primary btn-sm">Update</button>
+                    </form>
+
+                    </td>
+                  </tr>
+      
+                </tbody>
+              </table>
+
+              <!--Pagination-->
+              <div class></div>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <li th:if="${currentPage!=0}" class="page-item">
+                    <a class="page-link" th:href="@{'/user/show_contacts/'+${currentPage-1}}"><i class="f fa-light fa fa-angle-left"></i></i></a>
+                  </li>
+                  <li th:classappend="${currentPage==i-1?'active':''}" th:each="i:${#numbers.sequence(1,totalPages)}" class="page-item"><a th:href="@{'/user/show_contacts/'+${i-1}}" class="page-link" href="#"><span th:text="${i}"></span></a></li>
+          
+                  <li th:if="${currentPage+1!=totalPages}" class="page-item">
+                    <a class="page-link" th:href="@{'/user/show_contacts/'+${currentPage+1}}" ><i class="fa fa-light fa fa-angle-right"></i></a>
+                  </li>
+                </ul>
+              </nav>
+            
+            </div>
+          </div>
+        </div>
+    </div>
+    <script th:replace="normal/base::jsc"></script>
+  </body>
+</html>

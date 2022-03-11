@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xlmns:th="https://www.thymeleaf.org">
+  <head th:replace="normal/base::userheader" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Contact</title>
+  </head>
+  <body>
+    <nav th:replace="normal/base::navbarUser"></nav>
+    <div>
+      <div th:replace="normal/base::sidebar"></div>
+    </div>
+    <div>
+      <div  class="content">
+        <div class="me-5 add">
+          <h4 class="text-center m mt-2">Add Contact</h4>
+          <form th:action="@{/user/process_contact}" th:object="${contact}" enctype="multipart/form-data" method="post" class="">
+            <input type="hidden" class="form-control" th:value="${contact.cid}" name="cid"   id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div class="mb-3">
+              <!-- <label for="exampleInputEmail1" class="form-label">First Name</label> -->
+              <input type="text" class="form-control" th:value="${contact.name}" name="name"  placeholder="First Name" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <!-- <label for="exampleInputEmail1" class="form-label">Last Name</label> -->
+                <input type="text" class="form-control" th:value="${contact.secondName}"  name="secondName" placeholder="Last Name" id="exampleInputEmail1" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <!-- <label for="exampleInputEmail1" class="form-label">Work</label> -->
+                <input type="text" class="form-control" th:value="${contact.work}"  name="work" placeholder="Work Detail" id="exampleInputEmail1" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <!-- <label for="exampleInputEmail1" class="form-label">Email</label> -->
+                <input type="email" class="form-control" th:value="${contact.email}"  name="email" placeholder="Email" id="exampleInputEmail1" aria-describedby="emailHelp">
+              </div>
+            <div class="mb-3">
+              <!-- <label for="exampleInputPassword1" class="form-label">Mobile No</label> -->
+              <input type="text" class="form-control" th:value="${contact.phone}"  name="phone" placeholder="Mobile no" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3">
+                <img class="cpic1" th:src="@{'/images/'+${contact.image}}">
+                
+            </div>
+            <div class="mb-3">
+                <input type="file" id="image" name="profileImage" accept="image/*">
+              </div>
+              </div>
+              <div class="form-group">
+                <textarea
+                  name="description"
+                  th:value="${contact.description}" 
+                  id="description"
+                  rows="6"
+                  placeholder="Something about youself"
+                  class="form-control"
+                ></textarea>
+              </div>
+            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+          </form>
+        </div>
+    </div>
+  </body>
+</html>

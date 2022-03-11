@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xlmns:th="https://www.thymeleaf.org">
+  <head th:replace="normal/base::userheader" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard</title>
+  </head>
+  <body>
+    <nav th:replace="normal/base::navbarUser"></nav>
+    <div>
+      <div th:replace="normal/base::sidebar"></div>
+    </div>
+    <div>
+      <div th:fragment="content" class="content">
+        
+        <div class="add mt-2">
+          <h1 class="mt-5">Private Dashboard</h1>
+        </div>
+    </div>
+  </body>
+</html>

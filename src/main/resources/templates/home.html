@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xlmns:th="https://www.thymeleaf.org">
+  <head th:replace="base::header"/>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}" />
+  </head>
+  <body>
+    
+    <nav th:replace="base::navbar"></nav>
+    <section class="banner d-flex justify-content-center align-item-center">
+      <div class="justify-content-center mt-5 text-center">
+        <h1 class="font-weight-bold">Smart Contact</h1>
+        <p>An efficient way to manage all your contacts</p>
+        <button class="btn btn-primary text-white">Get Started</button>
+      </div>
+    </section>
+   
+  </body>
+</html>
