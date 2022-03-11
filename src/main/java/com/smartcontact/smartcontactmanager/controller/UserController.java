@@ -23,6 +23,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +43,7 @@ public class UserController {
     private UserRepo userRepo;
     @Autowired
     private ContactRepo contactRepo;
+    PasswordEncoder pe = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     @ModelAttribute
     public void addCommonData(Model model, Principal principal) {
@@ -145,25 +149,49 @@ public class UserController {
     }
 
     @PostMapping("/process_update")
-    public String process_update(@ModelAttribute Contact contact,@RequestParam("profileImage") MultipartFile file,Principal p,Model m,HttpSession ses ) {
+    public String process_update(@ModelAttribute Contact contact, @RequestParam("profileImage") MultipartFile file,
+            Principal p, Model m, HttpSession ses) {
         try {
 
-            if(file.isEmpty()) {
+            if (file.isEmpty()) {
 
-                
             }
-            User user=userRepo.getUserByUserName(p.getName());
+            User user = userRepo.getUserByUserName(p.getName());
             contact.setUser(user);
             contactRepo.save(contact);
-            
-        } 
-        catch(Exception e) {
+
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return "redirect:/user/show_contacts/0";
     }
+
     @GetMapping("/profile")
     public String profile() {
         return "normal/profile";
     }
+
+    @GetMapping("/setting")
+    public String setting() {
+
+        return "normal/setting";
+    }
+
+    @PostMapping("/change_password")
+    public String changePassword(Principal p, @RequestParam("oldP") String oldP, @RequestParam("newP") String newP,
+            Model m) {
+
+        User user = userRepo.getUserByUserName(p.getName());
+        if (pe.matches(oldP, user.getPassword())) {
+            user.setPassword(pe.encode(newP));
+            userRepo.save(user);
+        } else {
+            String msg = "Please Enter Correct Password";
+            m.addAttribute("msg", msg);
+            return "redirect:/user/setting";
+        }
+        return "redirect:/user/index";
+    }
+
+    
 }

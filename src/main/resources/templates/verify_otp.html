@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xlmns:th="https://www.thymeleaf.org">
+  <head th:replace="normal/base::userheader" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verify</title>
+  </head>
+  <body>
+    <nav th:replace="base::header"></nav>    
+            <div class="add container text-center">
+                <h1 class="text-center">Verification</h1>
+                <div class="alert alert-success">We have sent otp to your email</div>
+                <div class="alert alert-success" th:text="${msg}"></div>
+
+                <form th:action="@{/verify_otp} "enctype="multipart/form-data" method="post">
+                    <div class="me-3 text-center">
+                      <input type="text" class="form-control me-4" name="otp"  placeholder="Enter OTP here" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                      <button type="submit" class="btn btn-warning mt-2">Verify</button>
+                    </div>
+                </form>
+            </div>
+  </body>
+</html>

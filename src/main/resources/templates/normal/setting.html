@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xlmns:th="https://www.thymeleaf.org">
+  <head th:replace="normal/base::userheader" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard</title>
+  </head>
+  <body>
+    <nav th:replace="normal/base::navbarUser"></nav>
+    <div>
+      <div th:replace="normal/base::sidebar"></div>
+    </div>
+    <div>
+      <div th:fragment="content" class="content">
+        
+        <div class="add mt-2">
+          <h1 class="mt-5">Change Password</h1>
+          <h3 class="${msg}"></h3>
+          <form th:action="@{/user/change_password}" th:object="${msg}" method="post">
+            <div class="mb-3">
+              <input type="text" class="form-control" name="oldP"  placeholder="Enter your old Password" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              
+                <input type="text" class="form-control" name="newP" placeholder="Enter your New Password" id="exampleInputEmail1" aria-describedby="emailHelp">
+              </div>
+              <button type="submit" class="btn btn-primary mt-2">Change</button>
+              <button type="submit" class="btn btn-primary mt-2">Reset</button>
+              </form>
+        </div>
+    </div>
+  </body>
+</html>

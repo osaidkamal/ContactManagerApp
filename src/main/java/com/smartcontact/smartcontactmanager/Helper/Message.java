@@ -1,6 +1,7 @@
 package com.smartcontact.smartcontactmanager.Helper;
 
 public class Message {
+    public static final String RecipientType = null;
     private String content;
     private String type;
     public Message(String content, String type) {
